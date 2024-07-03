@@ -95,13 +95,17 @@ final _sites = <_SocialSite>[
     iconColor: Colors.transparent,
   ),
   _SocialSite(
+      title: 'مسجد الأشراف',
+      url: 'https://maps.app.goo.gl/8Eog1x4g8nQqtKSc9',
+      icon: const Icon(Icons.location_on),
+      iconColor: Colors.green),
+  _SocialSite(
     title: 'توصية ورجاء وأمر لجميع المتابعين',
     url: 'https://youtu.be/KbQnZN5x2-g',
     icon: SvgPicture.asset(
       'assets/icons/youtube-icon-svgrepo-com.svg',
       semanticsLabel: 'youtube_icon',
       width: 24,
-      // colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn),
     ),
     iconColor: Colors.transparent,
   ),
@@ -112,7 +116,6 @@ final _sites = <_SocialSite>[
       'assets/icons/youtube-icon-svgrepo-com.svg',
       semanticsLabel: 'youtube_icon',
       width: 24,
-      // colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn),
     ),
     iconColor: Colors.transparent,
   ),
@@ -148,7 +151,7 @@ class SocialScreen extends StatelessWidget {
                       'assets/imgs/social_png.png',
                     ),
                     ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: _sites.length,
                       itemBuilder: (context, i) {

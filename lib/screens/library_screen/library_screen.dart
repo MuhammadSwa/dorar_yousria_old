@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:yosria/common/helpers/helpers.dart';
 import 'package:yosria/screens/download_manager_screen/download_controller.dart';
 import 'package:yosria/screens/library_screen/pdf_viewer_widget.dart';
+import 'package:yosria/widgets/stream_download_dialog.dart';
 
 const booksTitles = <String, String>{
   'الدرر النقية في أوراد الطريقة اليسرية الصديقية الشاذلية':
@@ -76,10 +77,11 @@ class BookListTile extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (context) {
-                        return streamOrDownloadDialog(
-                            context, '/downloadManager/1', () {
-                          context.go('/library/pdfViewer/$title');
-                        });
+                        return StreamOrDownloadDialog(
+                            route: '/downloadManager/1',
+                            toRun: () {
+                              context.go('/library/pdfViewer/$title');
+                            });
                       });
                   // context.push('/downloadManager/1');
                 },

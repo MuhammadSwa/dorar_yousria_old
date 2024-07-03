@@ -4,42 +4,15 @@ import 'package:get/instance_manager.dart';
 import 'package:yosria/audioPlayer/audioPlayer.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yosria/common/helpers/helpers.dart';
+import 'package:yosria/screens/library_screen/pdf_viewer_widget.dart';
+import 'package:yosria/widgets/stream_download_dialog.dart';
 
+//
 class PlayAudioBtnZikrPage extends StatelessWidget {
   const PlayAudioBtnZikrPage(
       {super.key, required this.title, required this.url});
   final String title;
   final String? url;
-
-  Widget _streamOrDownloadAudioDialog(
-      BuildContext context, String url, String title) {
-    final c = Get.put(Controller());
-    return AlertDialog(
-      contentPadding: const EdgeInsets.all(20),
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton.icon(
-            onPressed: () {
-              Navigator.pop(context);
-              context.push('/downloadManager/0');
-            },
-            label: const Text('تحميل'),
-            icon: const Icon(Icons.download),
-          ),
-          const SizedBox(width: 20),
-          ElevatedButton.icon(
-            onPressed: () {
-              Navigator.pop(context);
-              c.initPlayer(url, title, false);
-            },
-            label: const Text('تشغيل بالإنترنت'),
-            icon: const Icon(Icons.settings_input_antenna),
-          )
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +27,7 @@ class PlayAudioBtnZikrPage extends StatelessWidget {
             if (snapshot.data == true) {
               return IconButton(
                 onPressed: () {
+                  // TODO: change to accept value of file downloaded or not to load url or file
                   c.initPlayer(url!, title, true);
                 },
                 icon: const Icon(Icons.volume_up),
@@ -65,8 +39,13 @@ class PlayAudioBtnZikrPage extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (context) {
-                        return _streamOrDownloadAudioDialog(
-                            context, url!, title);
+                        // return _streamOrDownloadAudioDialog(
+                        //     context, url!, title);
+                        return StreamOrDownloadDialog(
+                            route: '/downloadManager/0',
+                            toRun: () {
+                              c.initPlayer(url!, title, false);
+                            });
                       },
                     );
                   },

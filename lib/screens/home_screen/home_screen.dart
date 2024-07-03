@@ -60,10 +60,6 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Text(
-              'ذو الحجة',
-              style: TextStyle(fontFamily: 'antice'),
-            ),
             ZikrOfTheDayTile(
                 title: 'ورد يوم ${arabicWeekdays[todaysNum() - 1]}',
                 route: '/home/todaysZikr'),
