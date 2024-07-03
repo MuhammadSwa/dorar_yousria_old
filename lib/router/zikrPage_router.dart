@@ -11,6 +11,7 @@ GoRoute zikrPageRoute() {
     pageBuilder: (context, state) {
       // TODO: find a better way to handle helia and azkar week
       final zikr = state.pathParameters['zikr'];
+
       if (zikr == alhyliaAndNasab.title) {
         return handleHeliaNasab();
       }
@@ -19,7 +20,7 @@ GoRoute zikrPageRoute() {
       }
 
       return CustomTransitionPage(
-        child: ZikrScreen(title: state.pathParameters['zikr']!),
+        child: ZikrScreen(title: state.pathParameters['zikr']! ),
         transitionsBuilder: slideTransition,
       );
     },

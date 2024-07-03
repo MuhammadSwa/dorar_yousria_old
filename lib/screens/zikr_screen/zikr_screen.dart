@@ -16,7 +16,6 @@ class ZikrScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Zikr zikr = allAzkar.azkarCategMap[title]!;
-    //  TODO: use these instead of hardcoding them,without raw Strings?
 
     return Scaffold(
       appBar: AppBar(

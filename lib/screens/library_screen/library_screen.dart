@@ -9,12 +9,10 @@ import 'package:yosria/screens/library_screen/pdf_viewer_widget.dart';
 const booksTitles = <String, String>{
   'الدرر النقية في أوراد الطريقة اليسرية الصديقية الشاذلية':
       'https://archive.org/download/dorar_app_book/dorar_awrad.pdf',
-  // 'https://drive.google.com/uc?export=download&id=1ZiyrYSRlH8ejD-_33wyMECDssysD4XhQ',
   'الأنوار الجلية في الجمع بين دلائل الخيرات والصلوات اليسرية':
-      'https://drive.google.com/uc?export=download&id=1xO1NW70m3VfHUDZd6BbitorBIl6KZIkv',
+      'https://archive.org/download/dorar_app_book/anwar_galia.pdf',
   'الحضرة اليسرية الصديقية الشاذلية':
       'https://archive.org/download/dorar_app_book/dorar_alhadra.pdf',
-  // 'https://drive.google.com/uc?export=download&id=1H6O3Vd0sMOT8MMTdyBUTrBzn2KecSb4r',
 };
 
 class LibraryScreen extends StatelessWidget {

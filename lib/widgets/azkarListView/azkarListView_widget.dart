@@ -4,6 +4,7 @@ import 'package:yosria/widgets/azkarListView/zikrListViewTile_widget.dart';
 class AzkarListViewWidget extends StatelessWidget {
   const AzkarListViewWidget({
     super.key,
+    // titles of collection
     required this.titles,
     required this.route,
     required this.barTitle,
@@ -17,7 +18,7 @@ class AzkarListViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        physics: scrollable == true
+        physics: scrollable
             ? const AlwaysScrollableScrollPhysics()
             : const NeverScrollableScrollPhysics(),
         itemCount: titles.length,

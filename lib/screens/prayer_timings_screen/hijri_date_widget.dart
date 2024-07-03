@@ -84,7 +84,9 @@ class _HijriDateWidgetState extends State<HijriDateWidget> {
   Widget build(BuildContext context) {
     final hc = Get.put(HijriOffsetController());
     return Obx(() {
-      return hc.formatDate(context, hc.getHijriDayByoffest());
+      final date = hc.getHijriDayByoffest();
+      return Text('${date.hDay} ${date.longMonthName} ${date.hYear}',
+          style: Theme.of(context).textTheme.titleMedium);
     });
   }
 }
