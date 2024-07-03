@@ -138,8 +138,7 @@ class _ZikrContentWidgetState extends State<ZikrContentWidget> {
                       'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ'
                     ],
                     style: TextStyle(
-                      fontFamily: "Amiri",
-                      fontWeight: FontWeight.w900,
+                      fontFamily: "AmiriQuran",
                       color: Theme.of(context).textTheme.bodyMedium!.color,
                     ),
                   ),

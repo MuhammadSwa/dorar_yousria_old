@@ -83,10 +83,17 @@ class _HijriDateWidgetState extends State<HijriDateWidget> {
   @override
   Widget build(BuildContext context) {
     final hc = Get.put(HijriOffsetController());
+    HijriCalendar.setLocal('ar');
     return Obx(() {
       final date = hc.getHijriDayByoffest();
+      // TODO: find proper font with good arabic numbers
+      // return Text(
+      //   // '${date.hDay} ${date.longMonthName} ${date.hYear}',
+      //   '${date.fullDate()}',
+      //   style: TextStyle(fontFamily: 'antice', fontSize: 28),
+      // );
       return Text('${date.hDay} ${date.longMonthName} ${date.hYear}',
-          style: Theme.of(context).textTheme.titleMedium);
+          style: Theme.of(context).textTheme.titleMedium!);
     });
   }
 }

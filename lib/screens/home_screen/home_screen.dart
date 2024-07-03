@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:yosria/common/helpers/helpers.dart';
 import 'package:yosria/screens/home_screen/home_popup_menu.dart';
@@ -59,6 +60,10 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Text(
+              'ذو الحجة',
+              style: TextStyle(fontFamily: 'antice'),
+            ),
             ZikrOfTheDayTile(
                 title: 'ورد يوم ${arabicWeekdays[todaysNum() - 1]}',
                 route: '/home/todaysZikr'),
@@ -102,4 +107,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-

@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: remove MultiProvider and use GetX
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<CoordinatesProvider>(
