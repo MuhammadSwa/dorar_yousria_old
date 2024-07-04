@@ -55,6 +55,7 @@ class _ZikrContentWidgetState extends State<ZikrContentWidget> {
     final Zikr zikr = allAzkar.azkarCategMap[widget.title]!;
     return GetX<FontController>(
       builder: (_) {
+        final fontSize = cf.fontSize.value;
         return SingleChildScrollView(
             child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 7),
@@ -70,7 +71,7 @@ class _ZikrContentWidgetState extends State<ZikrContentWidget> {
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall!
-                          .copyWith(fontSize: cf.fontSize.value * .7),
+                          .copyWith(fontSize: fontSize * .7),
                     ),
                     const Divider()
                   ],
@@ -81,7 +82,7 @@ class _ZikrContentWidgetState extends State<ZikrContentWidget> {
                 defaultStyle: Theme.of(context)
                     .textTheme
                     .bodyMedium!
-                    .copyWith(fontSize: cf.fontSize.value),
+                    .copyWith(fontSize: fontSize),
                 patternList: [
                   // === footer Numbering ===
 
@@ -115,7 +116,7 @@ class _ZikrContentWidgetState extends State<ZikrContentWidget> {
                         style: Theme.of(context)
                             .textTheme
                             .bodySmall!
-                            .copyWith(fontSize: cf.fontSize.value * .7),
+                            .copyWith(fontSize: fontSize * .7),
                       );
                     },
                   ),
@@ -173,7 +174,7 @@ class _ZikrContentWidgetState extends State<ZikrContentWidget> {
                     style: Theme.of(context)
                         .textTheme
                         .bodySmall!
-                        .copyWith(fontSize: cf.fontSize.value),
+                        .copyWith(fontSize: fontSize),
                   ),
                   EasyRichTextPattern(
                     targetString: [
@@ -186,7 +187,7 @@ class _ZikrContentWidgetState extends State<ZikrContentWidget> {
                     style: Theme.of(context)
                         .textTheme
                         .bodySmall!
-                        .copyWith(fontSize: cf.fontSize.value * .7),
+                        .copyWith(fontSize: fontSize * .7),
                     // style: TextStyle(color: Colors.green),
                   ),
 
@@ -219,7 +220,7 @@ class _ZikrContentWidgetState extends State<ZikrContentWidget> {
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall!
-                          .copyWith(fontSize: cf.fontSize.value * .7),
+                          .copyWith(fontSize: fontSize * .7),
                     ),
                   ],
                 ),
@@ -235,6 +236,7 @@ class _ZikrContentWidgetState extends State<ZikrContentWidget> {
 class RhymesWidget extends StatelessWidget {
   const RhymesWidget({super.key, required this.first, required this.second});
   final String first, second;
+
   EasyRichTextPattern _buildPattern() {
     final cf = Get.put(FontController());
     return EasyRichTextPattern(
@@ -254,29 +256,32 @@ class RhymesWidget extends StatelessWidget {
     );
   }
 
+  Widget _buildRhyme(context, String text, double fontSize, String alignment) {
+    return Align(
+      alignment:
+          alignment == 'right' ? Alignment.centerRight : Alignment.centerLeft,
+      child: EasyRichText(
+        defaultStyle: Theme.of(context)
+            .textTheme
+            .bodyMedium!
+            .copyWith(fontSize: fontSize),
+        text,
+        textAlign: alignment == 'right' ? TextAlign.right : TextAlign.left,
+        patternList: [_buildPattern()],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final fontSize = Get.put(FontController()).fontSize.value;
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 500),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
-        // alignment: Alignment.center,
         children: [
-          Align(
-            alignment: Alignment.centerRight,
-            child: EasyRichText(
-              first,
-              textAlign: TextAlign.right,
-              patternList: [_buildPattern()],
-            ),
-          ),
-          Align(
-              alignment: Alignment.centerLeft,
-              child: EasyRichText(second,
-                  patternList: [_buildPattern()], textAlign: TextAlign.left))
-          // const Text(':\n',
-          //     textAlign: TextAlign.right),
+          _buildRhyme(context, first, fontSize, 'right'),
+          _buildRhyme(context, second, fontSize, 'left'),
         ],
       ),
     );

@@ -116,9 +116,9 @@ flutter:
     - family: NotoNaskh
       fonts:
         - asset: fonts/NotoNaskArabic.ttf
-    # - family: Amiri
-    #   fonts:
-    #     - asset: fonts/Amiri-Bold.ttf
+    - family: Amiri
+      fonts:
+        - asset: fonts/Amiri-Bold.ttf
     - family: AmiriQuran
       fonts:
         - asset: fonts/AmiriQuran-Regular.ttf

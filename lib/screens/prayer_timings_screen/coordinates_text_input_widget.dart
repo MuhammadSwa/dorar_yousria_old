@@ -23,7 +23,7 @@ class CoordinatesTextInputWidget extends StatelessWidget {
             child: TextFormField(
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'برجاء تحديد خط العرض';
+                  return 'برجاء إدخال خط العرض';
                 }
 
                 if (double.tryParse(value) == null) {
@@ -37,7 +37,7 @@ class CoordinatesTextInputWidget extends StatelessWidget {
               onChanged: (value) => formModel.setLatitude(value),
               controller: controller['latitude'],
               decoration: const InputDecoration(
-                labelText: 'العرض',
+                labelText: 'خط العرض',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.location_on),
               ),
@@ -57,7 +57,7 @@ class CoordinatesTextInputWidget extends StatelessWidget {
             child: TextFormField(
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'برجاء تحديد خط الطول';
+                  return 'برجاء إدخال خط الطول';
                 }
                 if (double.tryParse(value) == null) {
                   return 'برجاء ادخال رقم';
@@ -70,7 +70,7 @@ class CoordinatesTextInputWidget extends StatelessWidget {
               onChanged: (value) => formModel.setLongitude(value),
               controller: controller['longitude'],
               decoration: const InputDecoration(
-                labelText: 'الطول',
+                labelText: 'خط الطول',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.location_on),
               ),

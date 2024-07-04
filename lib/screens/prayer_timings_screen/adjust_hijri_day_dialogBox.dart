@@ -21,50 +21,52 @@ class _AdjustHijriDayDialogboxState extends State<AdjustHijriDayDialogbox> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
-      content: SegmentedButton<int>(
-        segments: const [
-          ButtonSegment<int>(
-            value: -2,
-            label: Text('-2'),
-          ),
-          ButtonSegment<int>(
-            value: -1,
-            label: Text('-1'),
-          ),
-          ButtonSegment<int>(
-            value: 0,
-            label: Text('0'),
-          ),
-          ButtonSegment<int>(
-            value: 1,
-            label: Text('1'),
-          ),
-          ButtonSegment<int>(
-            value: 2,
-            label: Text('2'),
-          ),
-        ],
-        selected: <int>{offset},
-        onSelectionChanged: (value) {
-          // widget.onData(value.first.name);
-          setState(
-            () {
-              offset = value.first;
-            },
-          );
-        },
-      ),
-      actions: [
-        ElevatedButton(
-          onPressed: () {
-            hc.setHiJriDayOffset(offset);
-            Navigator.pop(context);
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+        content: SegmentedButton<int>(
+          showSelectedIcon: false,
+          segments: const [
+            ButtonSegment<int>(
+              value: -2,
+              label: Text('-2'),
+            ),
+            ButtonSegment<int>(
+              value: -1,
+              label: Text('-1'),
+            ),
+            ButtonSegment<int>(
+              value: 0,
+              label: Text('0'),
+            ),
+            ButtonSegment<int>(
+              value: 1,
+              label: Text('1'),
+            ),
+            ButtonSegment<int>(
+              value: 2,
+              label: Text('2'),
+            ),
+          ],
+          selected: <int>{offset},
+          onSelectionChanged: (value) {
+            // widget.onData(value.first.name);
+            setState(
+              () {
+                offset = value.first;
+              },
+            );
           },
-          child: const Text('تأكيد'),
         ),
-      ],
-    );
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              hc.setHiJriDayOffset(offset);
+              Navigator.pop(context);
+            },
+            child: const Text('تأكيد'),
+          ),
+          // ],
+        ]);
   }
 }
 
@@ -85,5 +87,4 @@ class HijriOffsetController extends GetxController {
     offset.value = i;
     SharedPreferencesService.setHijriDayOffset(i);
   }
-
 }
