@@ -97,6 +97,7 @@ class SettingsScreen extends StatelessWidget {
                 ],
               ),
             ),
+            FontFamilySettingsWidget(),
             const Divider(),
             Padding(
               padding: const EdgeInsets.all(20),
@@ -110,7 +111,7 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   IconButton(
                       onPressed: () {
-                      context.push('/downloadManager/0');
+                        context.push('/downloadManager/0');
                       },
                       icon: const Icon(Icons.cloud_download_outlined))
                 ],
@@ -126,8 +127,68 @@ class SettingsScreen extends StatelessWidget {
 
 class FontController extends GetxController {
   var fontSize = SharedPreferencesService.getFontSize().obs;
+  var fontFamily = SharedPreferencesService.getQuranFontFamily().obs;
+
   changeSize(double newSize) {
     fontSize.value = newSize;
     SharedPreferencesService.setFontSize(newSize);
+  }
+
+  changeFamily(String newFamily) {
+    fontFamily.value = newFamily;
+    SharedPreferencesService.setQuranFontFamily(newFamily);
+  }
+}
+
+class FontFamilySettingsWidget extends StatefulWidget {
+  const FontFamilySettingsWidget({super.key});
+
+  @override
+  State<FontFamilySettingsWidget> createState() =>
+      _FontFamilySettingsWidgetState();
+}
+
+class _FontFamilySettingsWidgetState extends State<FontFamilySettingsWidget> {
+  String araFontFamily() {
+    final fc = Get.put(FontController());
+    final eng = fc.fontFamily.value;
+    return eng == 'Amiri' ? 'أميري' : 'أميري قرآن';
+  }
+
+  final fc = Get.put(FontController());
+  @override
+  Widget build(BuildContext context) {
+    String fontFamily = araFontFamily();
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        const Text(
+          'الخط القرآني',
+          style: TextStyle(fontSize: 20),
+        ),
+        DropdownButton(
+          // value: 0,
+          hint: Text(fontFamily),
+          onChanged: (font) {
+            setState(() {
+              fc.changeFamily(font!);
+              fontFamily = araFontFamily();
+            });
+          },
+          items: const <DropdownMenuItem<String>>[
+            DropdownMenuItem(
+              alignment: Alignment.centerRight,
+              value: 'Amiri',
+              child: Text('أميري'),
+            ),
+            DropdownMenuItem(
+              alignment: Alignment.centerRight,
+              value: 'AmiriQuran',
+              child: Text('أميري قرآن'),
+            ),
+          ],
+        ),
+      ]),
+    );
   }
 }

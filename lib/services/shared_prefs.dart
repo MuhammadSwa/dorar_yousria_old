@@ -104,6 +104,14 @@ class SharedPreferencesService {
     return size;
   }
 
+  static void setQuranFontFamily(String fontFamily) {
+    _sharedPreferences!.setString('quran_font_family', fontFamily);
+  }
+
+  static String getQuranFontFamily() {
+    return _sharedPreferences!.getString('quran_font_family') ?? 'AmiriQuran';
+  }
+
   static void setHijriDayOffset(int offset) {
     print('setting offest to $offset');
     _sharedPreferences!.setInt('hijri_day_offset', offset);

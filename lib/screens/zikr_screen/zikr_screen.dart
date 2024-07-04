@@ -49,13 +49,13 @@ const String araLettersRegex = '\u0600-\u06FF';
 
 class _ZikrContentWidgetState extends State<ZikrContentWidget> {
   // TODO: ground settings options in one SettingsController?
-  final cf = Get.put(FontController());
+  final fc = Get.put(FontController());
   @override
   Widget build(BuildContext context) {
     final Zikr zikr = allAzkar.azkarCategMap[widget.title]!;
     return GetX<FontController>(
       builder: (_) {
-        final fontSize = cf.fontSize.value;
+        final fontSize = fc.fontSize.value;
         return SingleChildScrollView(
             child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 7),
@@ -139,7 +139,7 @@ class _ZikrContentWidgetState extends State<ZikrContentWidget> {
                       'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ'
                     ],
                     style: TextStyle(
-                      fontFamily: "AmiriQuran",
+                      fontFamily: fc.fontFamily.value,
                       color: Theme.of(context).textTheme.bodyMedium!.color,
                     ),
                   ),
