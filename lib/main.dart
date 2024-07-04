@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:yosria/common/theme/dark_theme.dart';
@@ -8,6 +9,7 @@ import 'package:yosria/router/handle_router.dart';
 import 'package:yosria/screens/download_manager_screen/download_controller.dart';
 import 'package:yosria/services/providers.dart';
 import 'package:yosria/services/shared_prefs.dart';
+import 'package:yosria/widgets/main_wrapper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key, required this.theme});
   final AdaptiveThemeMode? theme;
 
-  final _router = handleRouter();
+  // final _router = handleRouter();
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +43,12 @@ class MyApp extends StatelessWidget {
         // initial: AdaptiveThemeMode.dark,
         initial: theme ?? AdaptiveThemeMode.system,
 // ,
-        builder: (theme, darkTheme) => MaterialApp.router(
+        builder: (theme, darkTheme) => GetMaterialApp(
+          textDirection: TextDirection.rtl,
           scrollBehavior: AppScrollBehavior(),
-          routerConfig: _router,
+          initialRoute: AppPage.navbar,
+          getPages: AppPage.routes,
+          // routerConfig: _router,
           title: 'الطريقة اليسرية',
           debugShowCheckedModeBanner: false,
           darkTheme: darkTheme,
