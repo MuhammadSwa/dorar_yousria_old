@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
-import 'package:yosria/screens/settings_screen/settings_screen.dart';
+import 'package:yosria/screens/settings_screen/font_settings_widget.dart';
 
 abstract class BaseTheme {
   static final double bodyMediumFontSize = Get.put(FontController()).fontSize.value;

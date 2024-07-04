@@ -4,7 +4,6 @@ import 'package:get/instance_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yosria/common/helpers/helpers.dart';
 import 'package:yosria/screens/download_manager_screen/download_controller.dart';
-import 'package:yosria/screens/library_screen/pdf_viewer_widget.dart';
 import 'package:yosria/widgets/stream_download_dialog.dart';
 
 const booksTitles = <String, String>{
@@ -43,11 +42,12 @@ class BookListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final dc = Get.put(DownloaderController());
     return Obx(() {
+      // NOTE : don't delete this.
       final fileDownloaded = dc.filesDownloaded[title];
       return FutureBuilder(
           future: isFileDownloaded(title: title, directory: 'books'),
           builder: (context, snapshot) {
-            if (snapshot.data == true || fileDownloaded != null) {
+            if (snapshot.data == true ) {
               return ListTile(
                 title: Text(
                   title,

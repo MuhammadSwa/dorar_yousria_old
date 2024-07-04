@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:yosria/models/azkar_models.dart';
-import 'package:yosria/screens/settings_screen/settings_screen.dart';
+import 'package:yosria/screens/settings_screen/font_settings_widget.dart';
 import 'package:yosria/screens/zikr_screen/playAudio_btn_zikr_page.dart';
 
 class ZikrScreen extends StatelessWidget {
@@ -135,7 +135,7 @@ class _ZikrContentWidgetState extends State<ZikrContentWidget> {
                   EasyRichTextPattern(
                     targetString: [
                       r'﴿[^﴾]+﴾',
-                      '«[^»]+»',
+                      // '«[^»]+»',
                       'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ'
                     ],
                     style: TextStyle(
@@ -147,11 +147,7 @@ class _ZikrContentWidgetState extends State<ZikrContentWidget> {
                   // TODO: better patternt matching and beter replacing.
                   EasyRichTextPattern(
                     targetString:
-                        // r'^F([^X]*)X',
-                        // matchRightWordBoundary: true,
                         r'F[^X][\u0600-\u06FF\s0-9\[\]\^]+__[\u0600-\u06FF\s0-9\[\]\^]+X',
-                    //  r'F(?!X)[\u0600-\u06FF\s0-9\[\]\^]+__[\u0600-\u06FF\s0-9\[\]\^]+X',
-                    // targetString: '.*:FF:.*',
                     matchBuilder: (context, match) {
                       final rhymes = match?[0]!
                           .replaceAll('F', '')
@@ -215,13 +211,28 @@ class _ZikrContentWidgetState extends State<ZikrContentWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Divider(),
-                    Text(
+                    EasyRichText(
                       zikr.footer,
-                      style: Theme.of(context)
+                      defaultStyle: Theme.of(context)
                           .textTheme
                           .bodySmall!
                           .copyWith(fontSize: fontSize * .7),
-                    ),
+                      patternList: [
+                        EasyRichTextPattern(
+                          targetString: [
+                            r'﴿[^﴾]+﴾',
+                            // '«[^»]+»',
+                            'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ',
+                          ],
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(
+                                  fontSize: fontSize * .7,
+                                  fontFamily: fc.fontFamily.value),
+                        )
+                      ],
+                    )
                   ],
                 ),
               }

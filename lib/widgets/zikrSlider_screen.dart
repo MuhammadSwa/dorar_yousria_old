@@ -16,7 +16,7 @@ class ZikrsliderScreen extends StatelessWidget {
         itemCount: titles.length,
         itemBuilder: (BuildContext context, int i) {
           if (titles[i] == alhyliaAndNasab.title) {
-            return HeliaNasabScreen();
+            return const HeliaNasabScreen();
           }
           return ZikrScreen(title: titles[i]);
         },
