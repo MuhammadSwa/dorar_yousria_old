@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:yosria/audioPlayer/audioPlayer.dart';
-import 'package:go_router/go_router.dart';
 import 'package:yosria/common/helpers/helpers.dart';
-import 'package:yosria/screens/library_screen/pdf_viewer_widget.dart';
 import 'package:yosria/widgets/stream_download_dialog.dart';
 
 //

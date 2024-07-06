@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yosria/common/helpers/helpers.dart';
 import 'package:yosria/screens/home_screen/home_popup_menu.dart';
+import 'package:yosria/widgets/azkarListView/bookmarks_controller.dart';
 import 'package:yosria/widgets/azkarListView/zikrListViewTile_widget.dart';
 import 'package:yosria/widgets/azkarListView/zikrOfTheDayTile_widget.dart';
 import 'package:yosria/models/azkar_models.dart';
 import 'package:yosria/widgets/azkarListView/azkarListView_widget.dart';
-import 'package:yosria/services/providers.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

@@ -1,51 +1,8 @@
 import 'package:adhan/adhan.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yosria/services/shared_prefs.dart';
 
-// TODO: how to save coordinates to cache and get them from there
-// calling getCoordinates from SharedPreferences once the app starts
-// then calling getCoordinates from CoordinatesProvider cache
-// and update cache when calling setCoordinates.
 
-class BookmarksController extends GetxController {
-  var bookmarks = SharedPreferencesService.getBookmarks();
-
-  List<String> getBookmarks() {
-    return SharedPreferencesService.getBookmarks();
-  }
-
-  void addBookmark(String bookmark) {
-    SharedPreferencesService.addBookmark(bookmark);
-    bookmarks = getBookmarks();
-    update();
-  }
-
-  void removeBookmark(String bookmark) {
-    SharedPreferencesService.removeBookmark(bookmark);
-    bookmarks = getBookmarks();
-    update();
-  }
-
-  // check if bookmarks exists and toggle bookmark
-  bool toggleBookmark(String bookmark) {
-    final wasBookmark = getBookmarks().contains(bookmark);
-    if (wasBookmark) {
-      removeBookmark(bookmark);
-    } else {
-      addBookmark(bookmark);
-    }
-    return wasBookmark;
-  }
-
-  // void setBookmarks(List<String> bookmarks) {
-  //   SharedPreferencesService.setBookmarks(bookmarks);
-  // }
-  //
-  // void removeAllBookmarks() {
-  //   SharedPreferencesService.removeAllBookmarks();
-  // }
-}
 
 class PrayerTimingsController extends GetxController {
   PrayerTimes? prayerTimings = PrayerTimeings.getPrayersTimings();
@@ -69,28 +26,6 @@ class PrayerTimingsController extends GetxController {
   }
 }
 
-// class CoordinatesProvider extends ChangeNotifier {
-//   void setPrayerSettings({
-//     required double lat,
-//     required double long,
-//     required String method,
-//     required String asrCalc,
-//   }) {
-//     SharedPreferencesService.setLatitude(lat);
-//     SharedPreferencesService.setLongitude(long);
-//     SharedPreferencesService.setMethod(method);
-//     SharedPreferencesService.setAsrCalculation(asrCalc);
-//     notifyListeners();
-//   }
-//
-//   PrayerTimes? getPrayersTimings() {
-//     return PrayerTimeings.getPrayersTimings();
-//   }
-//
-//   (Duration, String) timeLeftForNextPrayer() {
-//     return PrayerTimeings.timeLeftForNextPrayer();
-//   }
-// }
 
 class PrayerTimeings {
   static PrayerTimes? getPrayersTimings() {

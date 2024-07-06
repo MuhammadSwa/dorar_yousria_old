@@ -5,7 +5,6 @@ import 'package:yosria/models/consts/azkar_morning_evening_collection.dart';
 import 'package:yosria/widgets/azkarListView/azkarListView_widget.dart';
 import 'package:yosria/models/consts/ahzab_alshazly_collection.dart';
 import 'package:yosria/models/consts/azkar_algomari_collection.dart';
-import 'package:go_router/go_router.dart';
 import 'package:yosria/models/consts/chosen_salawat.dart';
 import 'package:yosria/models/consts/orphans.dart';
 import 'package:yosria/models/consts/poems_collection.dart';

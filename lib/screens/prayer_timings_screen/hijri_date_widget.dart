@@ -5,7 +5,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:yosria/screens/prayer_timings_screen/adjust_hijri_day_dialogBox.dart';
-import 'package:yosria/services/providers.dart';
+import 'package:yosria/screens/prayer_timings_screen/prayerTimingsController.dart';
 
 class HijriDateWidget extends StatefulWidget {
   const HijriDateWidget({super.key});
@@ -28,6 +28,8 @@ class _HijriDateWidgetState extends State<HijriDateWidget> {
 
     // NOTE: this handles updating the widget at maghrib.
     if (PrayerTimeings.getPrayersTimings() != null) {
+    // TODO: use Prayercontroller?
+
       final maghrib = PrayerTimeings.getPrayersTimings()!.maghrib;
       // if now is after magrib then add one day. (new day starts after maghrib)
       if (now.isAfter(maghrib)) {

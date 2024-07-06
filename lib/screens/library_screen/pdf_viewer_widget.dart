@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdfrx/pdfrx.dart';
-import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yosria/common/helpers/helpers.dart';
 import 'package:yosria/screens/library_screen/library_screen.dart';

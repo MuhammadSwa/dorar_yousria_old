@@ -3,11 +3,9 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
-import 'package:provider/provider.dart';
 import 'package:yosria/common/theme/dark_theme.dart';
 import 'package:yosria/router/handle_router.dart';
 import 'package:yosria/screens/download_manager_screen/download_controller.dart';
-import 'package:yosria/services/providers.dart';
 import 'package:yosria/services/shared_prefs.dart';
 
 void main() async {
@@ -29,28 +27,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: remove MultiProvider and use GetX
-    return
-        // MultiProvider(
-        // providers: [
-        //   ChangeNotifierProvider<CoordinatesProvider>(
-        //     create: (context) => CoordinatesProvider(),
-        //   ),
-        // ],
-        // child:
-        AdaptiveTheme(
+    return AdaptiveTheme(
       light: lightTheme,
       dark: darkTheme,
-      // initial: AdaptiveThemeMode.dark,
       initial: theme ?? AdaptiveThemeMode.system,
-// ,
+      // TODO: change routing to Getx
       builder: (theme, darkTheme) => MaterialApp.router(
         routerConfig: _router,
-        // textDirection: TextDirection.rtl,
         scrollBehavior: AppScrollBehavior(),
-        // initialRoute: AppPage.navbar,
-        // getPages: AppPage.routes,
-        // routerConfig: _router,
         title: 'الطريقة اليسرية',
         debugShowCheckedModeBanner: false,
         darkTheme: darkTheme,

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-import 'package:yosria/services/providers.dart';
+import 'package:yosria/widgets/azkarListView/bookmarks_controller.dart';
 
 class ZikrListViewTile extends StatelessWidget {
   const ZikrListViewTile({
