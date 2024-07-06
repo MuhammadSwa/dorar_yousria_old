@@ -100,7 +100,6 @@ class ManualCoordinatesForm extends StatelessWidget {
                         final long = _formModel.longitude;
                         final method = _formModel.method;
                         final asrCalculation = _formModel.asrCalculation;
-                        // context.read<CoordinatesProvider>().setPrayerSettings(
                         Get.put(PrayerTimingsController()).setPrayerSettings(
                           lat: lat,
                           long: long,

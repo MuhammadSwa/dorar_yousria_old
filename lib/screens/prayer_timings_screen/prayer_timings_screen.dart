@@ -159,7 +159,6 @@ class PrayerTimingsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // prayerTimes = context.watch<CoordinatesProvider>().getPrayersTimings();
     return GetBuilder<PrayerTimingsController>(
         init: PrayerTimingsController(),
         builder: (c) {

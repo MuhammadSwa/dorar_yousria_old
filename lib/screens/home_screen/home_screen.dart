@@ -13,14 +13,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: you call boookmarks twice one here and one in azkarListScreen?
-    // get it from static cache class?
-    // final bookmarks = context.watch<CoordinatesProvider>().getBookmarks();
-
-    // TODO: refactor this
-    // get key of daysAzkarTitles map from it's value
-    // todaysName()
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('الطريقة اليسرية'),
@@ -40,8 +32,6 @@ class HomePage extends StatelessWidget {
             //
           ],
         ),
-        // body: Player(),
-        // ),
       ),
     );
   }

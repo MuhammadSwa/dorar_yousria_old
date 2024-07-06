@@ -13,9 +13,6 @@ class ZikrListViewTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: this gets bookmarks everytime from sharedpreds
-    // get it from static cache?
-    // final bookmarks = context.watch<CoordinatesProvider>().getBookmarks();
     return ListTile(
       title: Text(
         title,

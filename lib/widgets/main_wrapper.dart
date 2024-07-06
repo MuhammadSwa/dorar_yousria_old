@@ -3,22 +3,6 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yosria/audioPlayer/audioPlayer.dart';
 
-// class AppPage {
-//   static String navbar = '/';
-//   static String home = '/home';
-//   static String timings = '/timings';
-//   static String awradScreen = '/awradScreen';
-//   static String library = '/library';
-//
-//   static List<GetPage> routes = [
-//     GetPage(name: navbar, page: () => BottonNavBar()),
-//     GetPage(name: home, page: () => const HomePage()),
-//     GetPage(name: timings, page: () => const PrayerTimingsScreen()),
-//     GetPage(name: awradScreen, page: () => const AwradListScreen()),
-//     GetPage(name: library, page: () => const LibraryScreen()),
-//   ];
-// }
-
 class MainWrapper extends StatefulWidget {
   const MainWrapper({
     required this.navigationShell,
