@@ -1,11 +1,52 @@
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yosria/services/shared_prefs.dart';
 
 // TODO: how to save coordinates to cache and get them from there
 // calling getCoordinates from SharedPreferences once the app starts
 // then calling getCoordinates from CoordinatesProvider cache
 // and update cache when calling setCoordinates.
+
+class BookmarksController extends GetxController {
+  var bookmarks = SharedPreferencesService.getBookmarks();
+
+  List<String> getBookmarks() {
+    return SharedPreferencesService.getBookmarks();
+  }
+
+  void addBookmark(String bookmark) {
+    SharedPreferencesService.addBookmark(bookmark);
+    bookmarks = getBookmarks();
+    update();
+  }
+
+  void removeBookmark(String bookmark) {
+    SharedPreferencesService.removeBookmark(bookmark);
+    bookmarks = getBookmarks();
+    update();
+  }
+
+  // check if bookmarks exists and toggle bookmark
+  bool toggleBookmark(String bookmark) {
+    final wasBookmark = getBookmarks().contains(bookmark);
+    if (wasBookmark) {
+      removeBookmark(bookmark);
+    } else {
+      addBookmark(bookmark);
+    }
+    return wasBookmark;
+  }
+
+  // void setBookmarks(List<String> bookmarks) {
+  //   SharedPreferencesService.setBookmarks(bookmarks);
+  // }
+  //
+  // void removeAllBookmarks() {
+  //   SharedPreferencesService.removeAllBookmarks();
+  // }
+}
+
 class CoordinatesProvider extends ChangeNotifier {
   String url = '';
 
@@ -30,40 +71,40 @@ class CoordinatesProvider extends ChangeNotifier {
     return PrayerTimeings.timeLeftForNextPrayer();
   }
 
-  List<String> getBookmarks() {
-    return SharedPreferencesService.getBookmarks();
-  }
-
-  void setBookmarks(List<String> bookmarks) {
-    SharedPreferencesService.setBookmarks(bookmarks);
-    notifyListeners();
-  }
-
-  void removeAllBookmarks() {
-    SharedPreferencesService.removeAllBookmarks();
-    notifyListeners();
-  }
-
-  void addBookmark(String bookmark) {
-    SharedPreferencesService.addBookmark(bookmark);
-    notifyListeners();
-  }
-
-  void removeBookmark(String bookmark) {
-    SharedPreferencesService.removeBookmark(bookmark);
-    notifyListeners();
-  }
-
-  // check if bookmarks exists and toggle bookmark
-  bool toggleBookmark(String bookmark) {
-    final wasBookmark = getBookmarks().contains(bookmark);
-    if (wasBookmark) {
-      removeBookmark(bookmark);
-    } else {
-      addBookmark(bookmark);
-    }
-    return wasBookmark;
-  }
+  // List<String> getBookmarks() {
+  //   return SharedPreferencesService.getBookmarks();
+  // }
+  //
+  // void setBookmarks(List<String> bookmarks) {
+  //   SharedPreferencesService.setBookmarks(bookmarks);
+  //   notifyListeners();
+  // }
+  //
+  // void removeAllBookmarks() {
+  //   SharedPreferencesService.removeAllBookmarks();
+  //   notifyListeners();
+  // }
+  //
+  // void addBookmark(String bookmark) {
+  //   SharedPreferencesService.addBookmark(bookmark);
+  //   notifyListeners();
+  // }
+  //
+  // void removeBookmark(String bookmark) {
+  //   SharedPreferencesService.removeBookmark(bookmark);
+  //   notifyListeners();
+  // }
+  //
+  // // check if bookmarks exists and toggle bookmark
+  // bool toggleBookmark(String bookmark) {
+  //   final wasBookmark = getBookmarks().contains(bookmark);
+  //   if (wasBookmark) {
+  //     removeBookmark(bookmark);
+  //   } else {
+  //     addBookmark(bookmark);
+  //   }
+  //   return wasBookmark;
+  // }
 
   setAudioURl(String url) {
     this.url = url;
@@ -79,10 +120,10 @@ class PrayerTimeings {
     );
     final method = SharedPreferencesService.getMethod();
     final asrCalc = SharedPreferencesService.getAsrCalculation();
-    if (method == '' || asrCalc == '' || 
+    if (method == '' ||
+        asrCalc == '' ||
         myCoordinates.latitude == 0.0 ||
-        myCoordinates.longitude == 0.0
-        ) {
+        myCoordinates.longitude == 0.0) {
       return null;
     }
 

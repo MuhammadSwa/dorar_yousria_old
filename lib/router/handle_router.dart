@@ -22,131 +22,131 @@ final GlobalKey<NavigatorState> _rootNavigatorKey =
 // final GlobalKey<NavigatorState> _shellNavigatorKey =
 //     GlobalKey<NavigatorState>(debugLabel: 'shell');
 
-// GoRouter handleRouter() {
-//   return GoRouter(
-//     initialLocation: '/home',
-//     debugLogDiagnostics: true,
-//     navigatorKey: _rootNavigatorKey,
-//     routes: [
-//       GoRoute(
-//         path: '/settings',
-//         builder: (BuildContext context, GoRouterState state) {
-//           return const SettingsScreen();
-//         },
-//       ),
-//       GoRoute(
-//         path: '/social',
-//         builder: (BuildContext context, GoRouterState state) {
-//           return const SocialScreen();
-//         },
-//       ),
-//       GoRoute(
-//           path: '/downloadManager/:index',
-//           builder: (BuildContext context, GoRouterState state) {
-//             final index = int.parse(state.pathParameters['index']!);
-//             return DownloadManagerPage(index: index);
-//           }),
-//       GoRoute(
-//           path: '/slider',
-//           builder: (BuildContext context, GoRouterState state) {
-//             final titles = state.extra as List<String>;
-//             return ZikrsliderScreen(titles);
-//           }),
-//
-//       // bottomNavigation nested routes.
-//       StatefulShellRoute.indexedStack(
-//         builder: (context, state, navigationShell) {
-//           return MainWrapper(
-//             navigationShell: navigationShell,
-//           );
-//         },
-//         branches: <StatefulShellBranch>[
-//           // Branch Home
-//           StatefulShellBranch(routes: [
-//             GoRoute(
-//               path: '/home',
-//               name: 'home',
-//               builder: (BuildContext context, GoRouterState state) =>
-//                   const HomePage(),
-//               routes: [
-//                 zikrPageRoute(),
-//                 zikrCollectionRoute(parent: 'home'),
-//
-//                 todayZikrRoute(),
-//
-//                 weekCollectionRouter(parent: 'home'),
-//                 ...dayCollectionroute(parent: 'home'),
-//                 // TODO: make it work of helia+nasab
-//                 // _zikrImgsRoute(parent: '/home')
-//               ],
-//             )
-//           ]),
-//           // prayer_timings_screen
-//           StatefulShellBranch(
-//             routes: [
-//               GoRoute(
-//                   path: '/timings',
-//                   builder: (context, state) => const PrayerTimingsScreen()),
-//             ],
-//           ),
-// // third screen
-//           // StatefulShellBranch(
-//           StatefulShellBranch(
-//             routes: [
-//               GoRoute(
-//                 path: '/awradScreen',
-//                 name: '/awradScreen',
-//                 builder: (BuildContext context, GoRouterState state) =>
-//                     const AwradListScreen(),
-//                 routes: [
-//                   weekCollectionRouter(parent: 'awradScreen'),
-//                   zikrCollectionRoute(parent: 'awradScreen'),
-//                   zikrPageRoute(),
-//                   GoRoute(
-//                       path: 'heliaNasab',
-//                       name: 'awradScreen/heliaNasab',
-//                       pageBuilder: (context, state) {
-//                         return handleHeliaNasab();
-//                       }),
-//                 ],
-//               )
-//             ],
-//           ),
-//
-//           StatefulShellBranch(
-//             routes: [
-//               GoRoute(
-//                   path: '/library',
-//                   name: 'library',
-//                   builder: (BuildContext context, GoRouterState state) =>
-//                       const LibraryScreen(),
-//                   routes: [
-//                     GoRoute(
-//                         path: 'pdfViewer/:bookTitle',
-//                         name: 'pdfViewer/:bookTitle',
-//                         builder: (context, state) {
-//                           final bookTitle = state.pathParameters['bookTitle']!;
-//                           return PdfviewerWidget(title: bookTitle);
-//                         })
-//                   ])
-//             ],
-//           ),
-//
-//           // StatefulShellBranch(
-//           //   routes: [
-//           //     GoRoute(
-//           //       path: '/about',
-//           //       name: 'about',
-//           //       builder: (BuildContext context, GoRouterState state) =>
-//           //           const AboutTareeqaScreen(),
-//           //     )
-//           //   ],
-//           // ),
-//         ],
-//       )
-//     ],
-//   );
-// }
+GoRouter handleRouter() {
+  return GoRouter(
+    initialLocation: '/home',
+    debugLogDiagnostics: true,
+    navigatorKey: _rootNavigatorKey,
+    routes: [
+      GoRoute(
+        path: '/settings',
+        builder: (BuildContext context, GoRouterState state) {
+          return const SettingsScreen();
+        },
+      ),
+      GoRoute(
+        path: '/social',
+        builder: (BuildContext context, GoRouterState state) {
+          return const SocialScreen();
+        },
+      ),
+      GoRoute(
+          path: '/downloadManager/:index',
+          builder: (BuildContext context, GoRouterState state) {
+            final index = int.parse(state.pathParameters['index']!);
+            return DownloadManagerPage(index: index);
+          }),
+      GoRoute(
+          path: '/slider',
+          builder: (BuildContext context, GoRouterState state) {
+            final titles = state.extra as List<String>;
+            return ZikrsliderScreen(titles);
+          }),
+
+      // bottomNavigation nested routes.
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return MainWrapper(
+            navigationShell: navigationShell,
+          );
+        },
+        branches: <StatefulShellBranch>[
+          // Branch Home
+          StatefulShellBranch(routes: [
+            GoRoute(
+              path: '/home',
+              name: 'home',
+              builder: (BuildContext context, GoRouterState state) =>
+                  const HomePage(),
+              routes: [
+                zikrPageRoute(),
+                zikrCollectionRoute(parent: 'home'),
+
+                todayZikrRoute(),
+
+                weekCollectionRouter(parent: 'home'),
+                ...dayCollectionroute(parent: 'home'),
+                // TODO: make it work of helia+nasab
+                // _zikrImgsRoute(parent: '/home')
+              ],
+            )
+          ]),
+          // prayer_timings_screen
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                  path: '/timings',
+                  builder: (context, state) => const PrayerTimingsScreen()),
+            ],
+          ),
+// third screen
+          // StatefulShellBranch(
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/awradScreen',
+                name: '/awradScreen',
+                builder: (BuildContext context, GoRouterState state) =>
+                    const AwradListScreen(),
+                routes: [
+                  weekCollectionRouter(parent: 'awradScreen'),
+                  zikrCollectionRoute(parent: 'awradScreen'),
+                  zikrPageRoute(),
+                  GoRoute(
+                      path: 'heliaNasab',
+                      name: 'awradScreen/heliaNasab',
+                      pageBuilder: (context, state) {
+                        return handleHeliaNasab();
+                      }),
+                ],
+              )
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                  path: '/library',
+                  name: 'library',
+                  builder: (BuildContext context, GoRouterState state) =>
+                      const LibraryScreen(),
+                  routes: [
+                    GoRoute(
+                        path: 'pdfViewer/:bookTitle',
+                        name: 'pdfViewer/:bookTitle',
+                        builder: (context, state) {
+                          final bookTitle = state.pathParameters['bookTitle']!;
+                          return PdfviewerWidget(title: bookTitle);
+                        })
+                  ])
+            ],
+          ),
+
+          // StatefulShellBranch(
+          //   routes: [
+          //     GoRoute(
+          //       path: '/about',
+          //       name: 'about',
+          //       builder: (BuildContext context, GoRouterState state) =>
+          //           const AboutTareeqaScreen(),
+          //     )
+          //   ],
+          // ),
+        ],
+      )
+    ],
+  );
+}
 
 CustomTransitionPage<Widget> handleHeliaNasab() {
   return const CustomTransitionPage<Widget>(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 import 'package:yosria/common/helpers/helpers.dart';
 import 'package:yosria/screens/home_screen/home_popup_menu.dart';
 import 'package:yosria/widgets/azkarListView/zikrListViewTile_widget.dart';
@@ -14,37 +13,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const azkarDayTitlesToNum = <String, String>{
-      'ورد يوم الإثنين': '1',
-      'ورد يوم الثلاثاء': '2',
-      'ورد يوم الأربعاء': '3',
-      'ورد يوم الخميس': '4',
-      'ورد يوم الجمعة': '5',
-      'ورد يوم السبت': '6',
-      'ورد يوم الأحد': '7',
-    };
-
     // TODO: you call boookmarks twice one here and one in azkarListScreen?
     // get it from static cache class?
-    final bookmarks = context.watch<CoordinatesProvider>().getBookmarks();
-
-    // TODO: refactor this
-    // see if a bookmark is collection or orphan
-    final List<String> collectionTitles = [];
-    final List<String> orphanTitles = [];
-    final List<String> azkarOfDays = [];
-    var weekAzkarBookmarked = false;
-    for (var bookmark in bookmarks) {
-      if (azkarDayTitlesToNum.keys.contains(bookmark)) {
-        azkarOfDays.add(bookmark);
-      } else if (bookmark == 'أوراد الأسبوع') {
-        weekAzkarBookmarked = true;
-      } else if (azkarCollections.azkarCategList.keys.contains(bookmark)) {
-        collectionTitles.add(bookmark);
-      } else {
-        orphanTitles.add(bookmark);
-      }
-    }
+    // final bookmarks = context.watch<CoordinatesProvider>().getBookmarks();
 
     // TODO: refactor this
     // get key of daysAzkarTitles map from it's value
@@ -64,12 +35,63 @@ class HomePage extends StatelessWidget {
                 title: 'ورد يوم ${arabicWeekdays[todaysNum() - 1]}',
                 route: '/home/todaysZikr'),
             const Divider(),
+
+            const BookmarksTilesHomeScreen(),
             //
+          ],
+        ),
+        // body: Player(),
+        // ),
+      ),
+    );
+  }
+}
+
+class BookmarksTilesHomeScreen extends StatelessWidget {
+  const BookmarksTilesHomeScreen({super.key});
+
+  static const azkarDayTitlesToNum = <String, String>{
+    'ورد يوم الإثنين': '1',
+    'ورد يوم الثلاثاء': '2',
+    'ورد يوم الأربعاء': '3',
+    'ورد يوم الخميس': '4',
+    'ورد يوم الجمعة': '5',
+    'ورد يوم السبت': '6',
+    'ورد يوم الأحد': '7',
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: refactor this
+    return GetBuilder<BookmarksController>(
+      init: BookmarksController(),
+      builder: (c) {
+        final bookmarks = c.bookmarks;
+
+        // TODO: refactor this
+        // see if a bookmark is collection or orphan
+        final List<String> collectionTitles = [];
+        final List<String> orphanTitles = [];
+        final List<String> azkarOfDays = [];
+        var weekAzkarBookmarked = false;
+
+        for (var bookmark in bookmarks) {
+          if (azkarDayTitlesToNum.keys.contains(bookmark)) {
+            azkarOfDays.add(bookmark);
+          } else if (bookmark == 'أوراد الأسبوع') {
+            weekAzkarBookmarked = true;
+          } else if (azkarCollections.azkarCategList.keys.contains(bookmark)) {
+            collectionTitles.add(bookmark);
+          } else {
+            orphanTitles.add(bookmark);
+          }
+        }
+        return Column(
+          children: [
             if (weekAzkarBookmarked) ...{
               const ZikrListViewTile(
                   title: 'أوراد الأسبوع', route: '/home/weekCollection'),
             },
-
             if (bookmarks.isNotEmpty) ...{
               for (var day in azkarOfDays) ...{
                 ZikrListViewTile(
@@ -96,10 +118,8 @@ class HomePage extends StatelessWidget {
               ),
             }
           ],
-        ),
-        // body: Player(),
-        // ),
-      ),
+        );
+      },
     );
   }
 }

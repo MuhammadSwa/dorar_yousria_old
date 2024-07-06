@@ -9,7 +9,6 @@ import 'package:yosria/router/handle_router.dart';
 import 'package:yosria/screens/download_manager_screen/download_controller.dart';
 import 'package:yosria/services/providers.dart';
 import 'package:yosria/services/shared_prefs.dart';
-import 'package:yosria/widgets/main_wrapper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key, required this.theme});
   final AdaptiveThemeMode? theme;
 
-  // final _router = handleRouter();
+  final _router = handleRouter();
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +42,12 @@ class MyApp extends StatelessWidget {
         // initial: AdaptiveThemeMode.dark,
         initial: theme ?? AdaptiveThemeMode.system,
 // ,
-        builder: (theme, darkTheme) => GetMaterialApp(
-          textDirection: TextDirection.rtl,
+        builder: (theme, darkTheme) => MaterialApp.router(
+          routerConfig: _router,
+          // textDirection: TextDirection.rtl,
           scrollBehavior: AppScrollBehavior(),
-          initialRoute: AppPage.navbar,
-          getPages: AppPage.routes,
+          // initialRoute: AppPage.navbar,
+          // getPages: AppPage.routes,
           // routerConfig: _router,
           title: 'الطريقة اليسرية',
           debugShowCheckedModeBanner: false,

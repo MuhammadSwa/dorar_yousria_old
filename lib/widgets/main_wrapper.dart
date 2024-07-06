@@ -2,27 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yosria/audioPlayer/audioPlayer.dart';
-import 'package:yosria/screens/award_list_screen/awrad_list_screen.dart';
-import 'package:yosria/screens/home_screen/home_screen.dart';
-import 'package:yosria/screens/library_screen/library_screen.dart';
-import 'package:yosria/screens/prayer_timings_screen/prayer_timings_screen.dart';
-import 'package:yosria/widgets/azkarListView/bottom_nav_bar.dart';
 
-class AppPage {
-  static String navbar = '/';
-  static String home = '/home';
-  static String timings = '/timings';
-  static String awradScreen = '/awradScreen';
-  static String library = '/library';
-
-  static List<GetPage> routes = [
-    GetPage(name: navbar, page: () => BottonNavBar()),
-    GetPage(name: home, page: () => const HomePage()),
-    GetPage(name: timings, page: () => const PrayerTimingsScreen()),
-    GetPage(name: awradScreen, page: () => const AwradListScreen()),
-    GetPage(name: library, page: () => const LibraryScreen()),
-  ];
-}
+// class AppPage {
+//   static String navbar = '/';
+//   static String home = '/home';
+//   static String timings = '/timings';
+//   static String awradScreen = '/awradScreen';
+//   static String library = '/library';
+//
+//   static List<GetPage> routes = [
+//     GetPage(name: navbar, page: () => BottonNavBar()),
+//     GetPage(name: home, page: () => const HomePage()),
+//     GetPage(name: timings, page: () => const PrayerTimingsScreen()),
+//     GetPage(name: awradScreen, page: () => const AwradListScreen()),
+//     GetPage(name: library, page: () => const LibraryScreen()),
+//   ];
+// }
 
 class MainWrapper extends StatefulWidget {
   const MainWrapper({

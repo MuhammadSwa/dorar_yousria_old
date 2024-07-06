@@ -33,7 +33,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       searchTextDirection: TextDirection.rtl,
       onSearch: (query) => searchQuery = query,
       onSuggestionTap: (title) =>
-          context.go('/awradScreen/zikrCateg/$title'),
+          context.go('/awradScreen/zikr/$title'),
       suggestions: fullList,
     );
   }
