@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:yosria/screens/prayer_timings_screen/asr_calc_segmented_button.dart';
 import 'package:yosria/screens/prayer_timings_screen/calc_method.dart';
@@ -100,12 +101,13 @@ class ManualCoordinatesForm extends StatelessWidget {
                         final long = _formModel.longitude;
                         final method = _formModel.method;
                         final asrCalculation = _formModel.asrCalculation;
-                        context.read<CoordinatesProvider>().setPrayerSettings(
-                              lat: lat,
-                              long: long,
-                              method: method,
-                              asrCalc: asrCalculation,
-                            );
+                        // context.read<CoordinatesProvider>().setPrayerSettings(
+                        Get.put(PrayerTimingsController()).setPrayerSettings(
+                          lat: lat,
+                          long: long,
+                          method: method,
+                          asrCalc: asrCalculation,
+                        );
                         Navigator.pop(context);
                         // pop if you make timings setting screen
                       }

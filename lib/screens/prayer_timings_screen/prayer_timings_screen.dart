@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:adhan/adhan.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:provider/provider.dart';
 import 'package:yosria/screens/prayer_timings_screen/adjust_hijri_day_dialogBox.dart';
@@ -53,7 +54,6 @@ class PrayerTimingsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   NextPrayerWidget(),
-//
                   HijriDateWidget(),
                 ],
               ),
@@ -77,8 +77,11 @@ class NextPrayerWidget extends StatefulWidget {
 class _NextPrayerWidgetState extends State<NextPrayerWidget> {
   late Timer timer;
 
-  late Duration timeLeft = PrayerTimeings.timeLeftForNextPrayer().$1;
-  final prayerName = PrayerTimeings.timeLeftForNextPrayer().$2;
+  // late Duration timeLeft = PrayerTimeings.timeLeftForNextPrayer().$1;
+  // final prayerName = PrayerTimeings.timeLeftForNextPrayer().$2;
+  final pc = Get.put(PrayerTimingsController());
+  late Duration timeLeft = pc.timeLeftForNextPrayer.$1;
+  late final prayerName = pc.timeLeftForNextPrayer.$2;
 
   @override
   void dispose() {
@@ -88,26 +91,27 @@ class _NextPrayerWidgetState extends State<NextPrayerWidget> {
 
   @override
   void initState() {
-    // timer = Timer.periodic(
-    //   const Duration(seconds: 1),
-    //   (_) {
-    //     setState(() {
-    //       timeLeft = PrayerTimeings.timeLeftForNextPrayer();
-    //     });
-    //   },
-    // );
     timer = Timer.periodic(
       const Duration(seconds: 1),
       (_) {
         setState(() {
-          if (timeLeft.inSeconds == 0) {
-            timeLeft = PrayerTimeings.timeLeftForNextPrayer().$1;
-          } else {
-            timeLeft = timeLeft - const Duration(seconds: 1);
-          }
+          // TODO: how to change technique so it doesn't calculate every time
+          timeLeft = PrayerTimeings.timeLeftForNextPrayer().$1;
         });
       },
     );
+    // timer = Timer.periodic(
+    //   const Duration(seconds: 1),
+    //   (_) {
+    //     setState(() {
+    //       if (timeLeft.inSeconds == 0) {
+    //         timeLeft = PrayerTimeings.timeLeftForNextPrayer().$1;
+    //       } else {
+    //         timeLeft = timeLeft - const Duration(seconds: 1);
+    //       }
+    //     });
+    //   },
+    // );
 
     super.initState();
   }
@@ -157,54 +161,61 @@ class PrayerTimingsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    prayerTimes = context.watch<CoordinatesProvider>().getPrayersTimings();
-    SunnahTimes? sunnahTimes;
-    if (prayerTimes != null) {
-      sunnahTimes = SunnahTimes(prayerTimes!);
-    }
-    final duha = prayerTimes?.sunrise.add(const Duration(minutes: 20));
+    // prayerTimes = context.watch<CoordinatesProvider>().getPrayersTimings();
+    return GetBuilder<PrayerTimingsController>(
+        init: PrayerTimingsController(),
+        builder: (c) {
+          prayerTimes = c.prayerTimings;
+          SunnahTimes? sunnahTimes;
+          if (prayerTimes != null) {
+            sunnahTimes = SunnahTimes(prayerTimes!);
+          }
+          final duha = prayerTimes?.sunrise.add(const Duration(minutes: 20));
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const SizedBox(height: 10),
-        if (prayerTimes == null) ...{
-          Text(
-            'برجاء تحديد الموقع',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-        } else ...{
-          Text(
-            'مواقيت الصلاة',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-        },
-        const SizedBox(height: 10),
-        Table(
-          columnWidths: {
-            0: FixedColumnWidth(MediaQuery.of(context).size.width / 3),
-            1: FixedColumnWidth(MediaQuery.of(context).size.width / 3)
-          },
-          border: TableBorder(
-            horizontalInside: BorderSide(
-                width: 1, color: Theme.of(context).colorScheme.secondaryFixed),
-          ),
-          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-          children: [
-            _buildTableRow('المغرب', prayerTimes?.maghrib),
-            _buildTableRow('العشاء', prayerTimes?.isha),
-            _buildTableRow('منتصف الليل', sunnahTimes?.middleOfTheNight),
-            _buildTableRow('الثلث الأخير', sunnahTimes?.lastThirdOfTheNight),
-            _buildTableRow('الفجر', prayerTimes?.fajr),
-            _buildTableRow('الشروق', prayerTimes?.sunrise),
-            _buildTableRow('الضحى', duha),
-            _buildTableRow('الظهر', prayerTimes?.dhuhr),
-            _buildTableRow('العصر', prayerTimes?.asr),
-          ],
-        ),
-      ],
-    );
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 10),
+              if (prayerTimes == null) ...{
+                Text(
+                  'برجاء تحديد الموقع',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              } else ...{
+                Text(
+                  'مواقيت الصلاة',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              },
+              const SizedBox(height: 10),
+              Table(
+                columnWidths: {
+                  0: FixedColumnWidth(MediaQuery.of(context).size.width / 3),
+                  1: FixedColumnWidth(MediaQuery.of(context).size.width / 3)
+                },
+                border: TableBorder(
+                  horizontalInside: BorderSide(
+                      width: 1,
+                      color: Theme.of(context).colorScheme.secondaryFixed),
+                ),
+                defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                children: [
+                  _buildTableRow('المغرب', prayerTimes?.maghrib),
+                  _buildTableRow('العشاء', prayerTimes?.isha),
+                  _buildTableRow('منتصف الليل', sunnahTimes?.middleOfTheNight),
+                  _buildTableRow(
+                      'الثلث الأخير', sunnahTimes?.lastThirdOfTheNight),
+                  _buildTableRow('الفجر', prayerTimes?.fajr),
+                  _buildTableRow('الشروق', prayerTimes?.sunrise),
+                  _buildTableRow('الضحى', duha),
+                  _buildTableRow('الظهر', prayerTimes?.dhuhr),
+                  _buildTableRow('العصر', prayerTimes?.asr),
+                ],
+              ),
+            ],
+          );
+        });
   }
 }

@@ -30,31 +30,33 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: remove MultiProvider and use GetX
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<CoordinatesProvider>(
-          create: (context) => CoordinatesProvider(),
-        ),
-      ],
-      child: AdaptiveTheme(
-        light: lightTheme,
-        dark: darkTheme,
-        // initial: AdaptiveThemeMode.dark,
-        initial: theme ?? AdaptiveThemeMode.system,
+    return
+        // MultiProvider(
+        // providers: [
+        //   ChangeNotifierProvider<CoordinatesProvider>(
+        //     create: (context) => CoordinatesProvider(),
+        //   ),
+        // ],
+        // child:
+        AdaptiveTheme(
+      light: lightTheme,
+      dark: darkTheme,
+      // initial: AdaptiveThemeMode.dark,
+      initial: theme ?? AdaptiveThemeMode.system,
 // ,
-        builder: (theme, darkTheme) => MaterialApp.router(
-          routerConfig: _router,
-          // textDirection: TextDirection.rtl,
-          scrollBehavior: AppScrollBehavior(),
-          // initialRoute: AppPage.navbar,
-          // getPages: AppPage.routes,
-          // routerConfig: _router,
-          title: 'الطريقة اليسرية',
-          debugShowCheckedModeBanner: false,
-          darkTheme: darkTheme,
-          theme: theme,
-        ),
+      builder: (theme, darkTheme) => MaterialApp.router(
+        routerConfig: _router,
+        // textDirection: TextDirection.rtl,
+        scrollBehavior: AppScrollBehavior(),
+        // initialRoute: AppPage.navbar,
+        // getPages: AppPage.routes,
+        // routerConfig: _router,
+        title: 'الطريقة اليسرية',
+        debugShowCheckedModeBanner: false,
+        darkTheme: darkTheme,
+        theme: theme,
       ),
+      // ),
     );
   }
 }

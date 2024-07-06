@@ -47,8 +47,10 @@ class BookmarksController extends GetxController {
   // }
 }
 
-class CoordinatesProvider extends ChangeNotifier {
-  String url = '';
+class PrayerTimingsController extends GetxController {
+  PrayerTimes? prayerTimings = PrayerTimeings.getPrayersTimings();
+  (Duration, String) timeLeftForNextPrayer =
+      PrayerTimeings.timeLeftForNextPrayer();
 
   void setPrayerSettings({
     required double lat,
@@ -60,57 +62,35 @@ class CoordinatesProvider extends ChangeNotifier {
     SharedPreferencesService.setLongitude(long);
     SharedPreferencesService.setMethod(method);
     SharedPreferencesService.setAsrCalculation(asrCalc);
-    notifyListeners();
-  }
 
-  PrayerTimes? getPrayersTimings() {
-    return PrayerTimeings.getPrayersTimings();
-  }
-
-  (Duration, String) timeLeftForNextPrayer() {
-    return PrayerTimeings.timeLeftForNextPrayer();
-  }
-
-  // List<String> getBookmarks() {
-  //   return SharedPreferencesService.getBookmarks();
-  // }
-  //
-  // void setBookmarks(List<String> bookmarks) {
-  //   SharedPreferencesService.setBookmarks(bookmarks);
-  //   notifyListeners();
-  // }
-  //
-  // void removeAllBookmarks() {
-  //   SharedPreferencesService.removeAllBookmarks();
-  //   notifyListeners();
-  // }
-  //
-  // void addBookmark(String bookmark) {
-  //   SharedPreferencesService.addBookmark(bookmark);
-  //   notifyListeners();
-  // }
-  //
-  // void removeBookmark(String bookmark) {
-  //   SharedPreferencesService.removeBookmark(bookmark);
-  //   notifyListeners();
-  // }
-  //
-  // // check if bookmarks exists and toggle bookmark
-  // bool toggleBookmark(String bookmark) {
-  //   final wasBookmark = getBookmarks().contains(bookmark);
-  //   if (wasBookmark) {
-  //     removeBookmark(bookmark);
-  //   } else {
-  //     addBookmark(bookmark);
-  //   }
-  //   return wasBookmark;
-  // }
-
-  setAudioURl(String url) {
-    this.url = url;
-    notifyListeners();
+    prayerTimings = PrayerTimeings.getPrayersTimings();
+    timeLeftForNextPrayer = PrayerTimeings.timeLeftForNextPrayer();
+    update();
   }
 }
+
+// class CoordinatesProvider extends ChangeNotifier {
+//   void setPrayerSettings({
+//     required double lat,
+//     required double long,
+//     required String method,
+//     required String asrCalc,
+//   }) {
+//     SharedPreferencesService.setLatitude(lat);
+//     SharedPreferencesService.setLongitude(long);
+//     SharedPreferencesService.setMethod(method);
+//     SharedPreferencesService.setAsrCalculation(asrCalc);
+//     notifyListeners();
+//   }
+//
+//   PrayerTimes? getPrayersTimings() {
+//     return PrayerTimeings.getPrayersTimings();
+//   }
+//
+//   (Duration, String) timeLeftForNextPrayer() {
+//     return PrayerTimeings.timeLeftForNextPrayer();
+//   }
+// }
 
 class PrayerTimeings {
   static PrayerTimes? getPrayersTimings() {
