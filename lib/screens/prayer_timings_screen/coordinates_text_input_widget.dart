@@ -13,7 +13,7 @@ class CoordinatesTextInputWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+      constraints: BoxConstraints(maxWidth: MediaQuery.sizeOf(context).width),
       child: Row(
         children: [
           const SizedBox(

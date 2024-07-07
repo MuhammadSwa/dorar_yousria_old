@@ -3,6 +3,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:hijri/hijri_calendar.dart';
+import 'package:yosria/screens/prayer_timings_screen/prayerTimingsController.dart';
 import 'package:yosria/services/shared_prefs.dart';
 
 class AdjustHijriDayDialogbox extends StatefulWidget {
@@ -49,7 +50,6 @@ class _AdjustHijriDayDialogboxState extends State<AdjustHijriDayDialogbox> {
           ],
           selected: <int>{offset},
           onSelectionChanged: (value) {
-            // widget.onData(value.first.name);
             setState(
               () {
                 offset = value.first;
@@ -74,11 +74,20 @@ class HijriOffsetController extends GetxController {
   var offset = SharedPreferencesService.getHijriDayOffset().obs;
 
   HijriCalendar getHijriDayByoffest() {
+    HijriCalendar.setLocal('ar');
     final adjustedDate = DateTime.now().add(Duration(days: offset.value));
+
+    final now = DateTime.now();
+    final maghrib = PrayerTimeings.getPrayersTimings()!.maghrib;
+    if (now.isAfter(maghrib)) {
+      return HijriCalendar.fromDate(adjustedDate.add(const Duration(days: 1)));
+    }
+
     return HijriCalendar.fromDate(adjustedDate);
   }
 
   HijriCalendar nextDayHijriDay() {
+    HijriCalendar.setLocal('ar');
     final adjustedDate = DateTime.now().add(Duration(days: offset.value + 1));
     return HijriCalendar.fromDate(adjustedDate);
   }
@@ -86,5 +95,6 @@ class HijriOffsetController extends GetxController {
   setHiJriDayOffset(int i) {
     offset.value = i;
     SharedPreferencesService.setHijriDayOffset(i);
+    update();
   }
 }

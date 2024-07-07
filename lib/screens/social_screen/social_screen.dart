@@ -138,7 +138,7 @@ class SocialScreen extends StatelessWidget {
                   child: SizedBox(
                 // constraints: BoxConstraints(
                 //     maxWidth: ),
-                width: MediaQuery.of(context).size.width * .8,
+                width: MediaQuery.sizeOf(context).width * .8,
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.,
                   crossAxisAlignment: CrossAxisAlignment.center,

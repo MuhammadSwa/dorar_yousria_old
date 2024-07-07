@@ -48,11 +48,16 @@ class PrayerTimingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
 //
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  NextPrayerWidget(),
-                  HijriDateWidget(),
+                  const NextPrayerWidget(),
+                  GetBuilder<HijriOffsetController>(
+                      init: HijriOffsetController(),
+                      builder: (c) {
+                        final date = c.getHijriDayByoffest();
+                        return HijriDateWidget(date:date);
+                      })
                 ],
               ),
 //
@@ -189,8 +194,8 @@ class PrayerTimingsWidget extends StatelessWidget {
               const SizedBox(height: 10),
               Table(
                 columnWidths: {
-                  0: FixedColumnWidth(MediaQuery.of(context).size.width / 3),
-                  1: FixedColumnWidth(MediaQuery.of(context).size.width / 3)
+                  0: FixedColumnWidth(MediaQuery.sizeOf(context).width / 3),
+                  1: FixedColumnWidth(MediaQuery.sizeOf(context).width / 3)
                 },
                 border: TableBorder(
                   horizontalInside: BorderSide(
