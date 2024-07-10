@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:yosria/services/location_service.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class LocationButtonWidget extends StatefulWidget {
   const LocationButtonWidget({super.key, required this.onGettingLocation});
@@ -23,6 +24,7 @@ class _LocationButtonWidgetState extends State<LocationButtonWidget> {
       );
     }).catchError((error) {
       showDialog(
+        // TODO: fix this use get dialog?
         context: context,
         builder: (builder) =>
             const AlertWidget(msg: 'برجاء تشغيل خدمة تحديد الموقع'),
@@ -51,7 +53,7 @@ class _LocationButtonWidgetState extends State<LocationButtonWidget> {
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       onPressed: () {
-        if (Platform.isLinux) {
+        if (UniversalPlatform.isLinux) {
           showDialog(
               context: context,
               builder: (builder) => const AlertWidget(

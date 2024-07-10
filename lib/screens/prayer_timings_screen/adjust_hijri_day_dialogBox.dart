@@ -73,12 +73,18 @@ class _AdjustHijriDayDialogboxState extends State<AdjustHijriDayDialogbox> {
 class HijriOffsetController extends GetxController {
   var offset = SharedPreferencesService.getHijriDayOffset().obs;
 
-  HijriCalendar getHijriDayByoffest() {
+  HijriCalendar? getHijriDayByoffest() {
     HijriCalendar.setLocal('ar');
     final adjustedDate = DateTime.now().add(Duration(days: offset.value));
 
     final now = DateTime.now();
-    final maghrib = PrayerTimeings.getPrayersTimings()!.maghrib;
+    final maghrib = PrayerTimeings.getPrayersTimings()?.maghrib;
+    if (maghrib == null) {
+      // when timings aren't set, return hijriday without considering maghrib,
+      return HijriCalendar.fromDate(adjustedDate);
+    }
+
+// if maghrib timing available return hijriday considering maghrib
     if (now.isAfter(maghrib)) {
       return HijriCalendar.fromDate(adjustedDate.add(const Duration(days: 1)));
     }

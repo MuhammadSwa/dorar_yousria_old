@@ -58,7 +58,8 @@ dependencies:
   url_launcher: ^6.3.0
   flutter_svg: ^2.0.10+1
   pdfrx: ^1.0.72
-  # background_downloader_sql: ^1.0.1
+  desktop_window: ^0.4.0
+  universal_platform: ^1.1.0
   # timezone: ^0.9.3
   # flutter_timezone: ^1.0.8
   # workmanager: ^0.5.2

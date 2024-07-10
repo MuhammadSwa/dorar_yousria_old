@@ -52,12 +52,19 @@ class PrayerTimingsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   const NextPrayerWidget(),
+
+                  // TODO: update this whenever prayerTimings changes
+                  // GetBuilder<PrayerTimingsController>(
+                  //     init: PrayerTimingsController(),
+                  //     builder: (pc) {
+                  //       return
+                  // },
                   GetBuilder<HijriOffsetController>(
                       init: HijriOffsetController(),
                       builder: (c) {
                         final date = c.getHijriDayByoffest();
-                        return HijriDateWidget(date:date);
-                      })
+                        return HijriDateWidget(date: date);
+                      }),
                 ],
               ),
 //
