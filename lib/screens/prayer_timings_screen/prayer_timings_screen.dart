@@ -110,9 +110,16 @@ class _NextPrayerWidgetState extends State<NextPrayerWidget> {
       });
     });
     timerEverySecond = Timer.periodic(const Duration(seconds: 1), (_) {
-      setState(() {
-        timeLeft = timeLeft - const Duration(seconds: 1);
-      });
+      if (timeLeft.inSeconds == 0) {
+        setState(() {
+          timeLeft = pc.timeLeftForNextPrayer.value.$1;
+          prayerName = pc.timeLeftForNextPrayer.value.$2;
+        });
+      } else {
+        setState(() {
+          timeLeft = timeLeft - const Duration(seconds: 1);
+        });
+      }
     });
 
     ever(pc.timeLeftForNextPrayer, (_) {

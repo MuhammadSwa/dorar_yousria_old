@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:yosria/models/azkar_models.dart';
+import 'package:yosria/screens/download_manager_screen/download_controller.dart';
 import 'package:yosria/screens/settings_screen/font_settings_widget.dart';
 import 'package:yosria/screens/zikr_screen/playAudio_btn_zikr_page.dart';
 
@@ -16,14 +17,19 @@ class ZikrScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Zikr zikr = allAzkar.azkarCategMap[title]!;
+    final dc = Get.put(DownloaderController());
 
     return Scaffold(
       appBar: AppBar(
         actions: [
-          PlayAudioBtnZikrPage(
-            title: zikr.title,
-            url: zikr.url,
-          )
+          Obx(() {
+            // NOTE : don't delete this.
+            final fileDownloaded = dc.filesDownloaded[title];
+            return PlayAudioBtnZikrPage(
+              title: zikr.title,
+              url: zikr.url,
+            );
+          })
         ],
         title: Text(
           title,
