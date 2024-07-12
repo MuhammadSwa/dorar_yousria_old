@@ -105,15 +105,15 @@ class _NextPrayerWidgetState extends State<NextPrayerWidget> {
   void initState() {
     timer = Timer.periodic(timeLeft, (_) {
       setState(() {
-        timeLeft = pc.timeLeftForNextPrayer.value.$1;
-        prayerName = pc.timeLeftForNextPrayer.value.$2;
+        timeLeft = PrayerTimeings.timeLeftForNextPrayer().$1;
+        prayerName = PrayerTimeings.timeLeftForNextPrayer().$2;
       });
     });
     timerEverySecond = Timer.periodic(const Duration(seconds: 1), (_) {
       if (timeLeft.inSeconds == 0) {
         setState(() {
-          timeLeft = pc.timeLeftForNextPrayer.value.$1;
-          prayerName = pc.timeLeftForNextPrayer.value.$2;
+          timeLeft = PrayerTimeings.timeLeftForNextPrayer().$1;
+          prayerName = PrayerTimeings.timeLeftForNextPrayer().$2;
         });
       } else {
         setState(() {
@@ -124,8 +124,8 @@ class _NextPrayerWidgetState extends State<NextPrayerWidget> {
 
     ever(pc.timeLeftForNextPrayer, (_) {
       setState(() {
-        timeLeft = pc.timeLeftForNextPrayer.value.$1;
-        prayerName = pc.timeLeftForNextPrayer.value.$2;
+        timeLeft = PrayerTimeings.timeLeftForNextPrayer().$1;
+        prayerName = PrayerTimeings.timeLeftForNextPrayer().$2;
       });
     });
     // timer = Timer.periodic(
