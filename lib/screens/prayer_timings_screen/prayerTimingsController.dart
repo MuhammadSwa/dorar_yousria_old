@@ -2,12 +2,10 @@ import 'package:adhan/adhan.dart';
 import 'package:get/get.dart';
 import 'package:yosria/services/shared_prefs.dart';
 
-
-
 class PrayerTimingsController extends GetxController {
   PrayerTimes? prayerTimings = PrayerTimeings.getPrayersTimings();
-  (Duration, String) timeLeftForNextPrayer =
-      PrayerTimeings.timeLeftForNextPrayer();
+  Rx<(Duration, String)> timeLeftForNextPrayer =
+      PrayerTimeings.timeLeftForNextPrayer().obs;
 
   void setPrayerSettings({
     required double lat,
@@ -21,11 +19,10 @@ class PrayerTimingsController extends GetxController {
     SharedPreferencesService.setAsrCalculation(asrCalc);
 
     prayerTimings = PrayerTimeings.getPrayersTimings();
-    timeLeftForNextPrayer = PrayerTimeings.timeLeftForNextPrayer();
+    timeLeftForNextPrayer.value = PrayerTimeings.timeLeftForNextPrayer();
     update();
   }
 }
-
 
 class PrayerTimeings {
   static PrayerTimes? getPrayersTimings() {

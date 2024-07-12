@@ -86,30 +86,51 @@ class NextPrayerWidget extends StatefulWidget {
 
 class _NextPrayerWidgetState extends State<NextPrayerWidget> {
   late Timer timer;
+  late Timer timerEverySecond;
 
   // late Duration timeLeft = PrayerTimeings.timeLeftForNextPrayer().$1;
   // final prayerName = PrayerTimeings.timeLeftForNextPrayer().$2;
   final pc = Get.put(PrayerTimingsController());
-  late Duration timeLeft = pc.timeLeftForNextPrayer.$1;
-  late final prayerName = pc.timeLeftForNextPrayer.$2;
+  late Duration timeLeft = pc.timeLeftForNextPrayer.value.$1;
+  late String prayerName = pc.timeLeftForNextPrayer.value.$2;
 
   @override
   void dispose() {
     timer.cancel();
+    timerEverySecond.cancel();
     super.dispose();
   }
 
   @override
   void initState() {
-    timer = Timer.periodic(
-      const Duration(seconds: 1),
-      (_) {
-        setState(() {
-          // TODO: how to change technique so it doesn't calculate every time
-          timeLeft = PrayerTimeings.timeLeftForNextPrayer().$1;
-        });
-      },
-    );
+    timer = Timer.periodic(timeLeft, (_) {
+      setState(() {
+        timeLeft = pc.timeLeftForNextPrayer.value.$1;
+        prayerName = pc.timeLeftForNextPrayer.value.$2;
+      });
+    });
+    timerEverySecond = Timer.periodic(const Duration(seconds: 1), (_) {
+      setState(() {
+        timeLeft = timeLeft - const Duration(seconds: 1);
+      });
+    });
+
+    ever(pc.timeLeftForNextPrayer, (_) {
+      setState(() {
+        timeLeft = pc.timeLeftForNextPrayer.value.$1;
+        prayerName = pc.timeLeftForNextPrayer.value.$2;
+      });
+    });
+    // timer = Timer.periodic(
+    //   const Duration(seconds: 1),
+    //   (_) {
+    //     setState(() {
+    //       // TODO: how to change technique so it doesn't calculate every time
+    //       timeLeft = PrayerTimeings.timeLeftForNextPrayer().$1;
+    //       prayerName = pc.timeLeftForNextPrayer.$2;
+    //     });
+    //   },
+    // );
     // timer = Timer.periodic(
     //   const Duration(seconds: 1),
     //   (_) {
