@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yosria/common/helpers/helpers.dart';
 import 'package:yosria/models/consts/alhadra_collection.dart';
 import 'package:yosria/models/consts/azkar_morning_evening_collection.dart';
+import 'package:yosria/models/consts/ibn_ataAllah.dart';
 import 'package:yosria/widgets/azkarListView/azkarListView_widget.dart';
 import 'package:yosria/models/consts/ahzab_alshazly_collection.dart';
 import 'package:yosria/models/consts/azkar_algomari_collection.dart';

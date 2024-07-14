@@ -10,6 +10,7 @@ import 'package:yosria/models/consts/orphans.dart';
 import 'package:yosria/models/consts/poems_collection.dart';
 import 'package:yosria/models/consts/salawat_yousria_collection.dart';
 import 'package:yosria/models/consts/tareeqa_bios_collection.dart';
+import 'package:yosria/models/consts/ibn_ataAllah.dart';
 
 class Zikr {
   final String title;
@@ -26,19 +27,6 @@ class Zikr {
   });
 }
 
-// new type Azkar that is a list of Zikr
-// class AzkarCateg {
-//   final List<Zikr> zikrList;
-//   final String title;
-//   final String notes;
-//   final String footer;
-//
-//   const AzkarCateg(
-//       {required this.title,
-//       required this.zikrList,
-//       this.notes = '',
-//       this.footer = ''});
-// }
 
 class AllAzkar {
   final Map<String, Zikr> azkarCategMap;
@@ -149,9 +137,6 @@ final allAzkar = AllAzkar(azkarCategMap: {
 // azkar that doesn't belong to any collection.
 final orphanAzkar = AllAzkar(azkarCategMap: {
   sanadAltareeqa.title: sanadAltareeqa,
-  monagaIbnAtaAllah.title: monagaIbnAtaAllah,
-  hawatfAlhaqaeq.title: hawatfAlhaqaeq,
-  //
   adabAltareeqa.title: adabAltareeqa,
   waseyaGamea.title: waseyaGamea,
   asrGomaa.title: asrGomaa,
@@ -189,6 +174,7 @@ const azkarCollections = AzkarCollections(
     'الأحزاب': ahzabCollection,
     'قصائد': poemsCollection,
     'صلوات مختارة على النبي ﷺ': chosenSalawatCollection,
+    'أوراد سيدي ابن عطاء الله': ibnAtaAllahCollection,
     'تراجم رجال الطريقة': tareeqaBiosCollection,
   },
 );
