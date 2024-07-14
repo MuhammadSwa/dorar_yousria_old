@@ -20,7 +20,6 @@ class ZikrListViewTile extends StatelessWidget {
       ),
       trailing: const Icon(Icons.chevron_right),
       leading: SizedBox(
-          width: 35,
           child: GetBuilder<BookmarksController>(builder: (c) {
             return IconButton(
               highlightColor: Colors.lightGreenAccent,

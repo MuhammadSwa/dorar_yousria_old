@@ -103,12 +103,12 @@ class _NextPrayerWidgetState extends State<NextPrayerWidget> {
 
   @override
   void initState() {
-    timer = Timer.periodic(timeLeft, (_) {
-      setState(() {
-        timeLeft = PrayerTimeings.timeLeftForNextPrayer().$1;
-        prayerName = PrayerTimeings.timeLeftForNextPrayer().$2;
-      });
-    });
+    // timer = Timer.periodic(timeLeft, (_) {
+    //   setState(() {
+    //     timeLeft = PrayerTimeings.timeLeftForNextPrayer().$1;
+    //     prayerName = PrayerTimeings.timeLeftForNextPrayer().$2;
+    //   });
+    // });
     timerEverySecond = Timer.periodic(const Duration(seconds: 1), (_) {
       if (timeLeft.inSeconds == 0) {
         setState(() {
@@ -117,7 +117,10 @@ class _NextPrayerWidgetState extends State<NextPrayerWidget> {
         });
       } else {
         setState(() {
-          timeLeft = timeLeft - const Duration(seconds: 1);
+          timeLeft = PrayerTimeings.timeLeftForNextPrayer().$1;
+          // NOTE: subtracting 1 second causes an unknown bug
+          // when the app is open for too long, time gets delayed
+          // timeLeft = timeLeft - const Duration(seconds: 1);
         });
       }
     });

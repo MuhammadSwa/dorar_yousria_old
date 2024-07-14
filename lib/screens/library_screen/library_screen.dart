@@ -47,7 +47,7 @@ class BookListTile extends StatelessWidget {
       return FutureBuilder(
           future: isFileDownloaded(title: title, directory: 'books'),
           builder: (context, snapshot) {
-            if (snapshot.data == true ) {
+            if (snapshot.data == true) {
               return ListTile(
                 title: Text(
                   title,
@@ -78,10 +78,17 @@ class BookListTile extends StatelessWidget {
                       context: context,
                       builder: (context) {
                         return StreamOrDownloadDialog(
-                            route: '/downloadManager/1',
-                            toRun: () {
-                              context.go('/library/pdfViewer/$title');
-                            });
+                          route: '/downloadManager/1',
+                          toRun: () {
+                            context.go('/library/pdfViewer/$title');
+                          },
+                          downloadRun: () {
+                            // start auto downloading the file
+                            final dc = Get.put(DownloaderController());
+                            dc.addTaskToQueue(
+                                url: url, id: title, directory: 'books');
+                          },
+                        );
                       });
                   // context.push('/downloadManager/1');
                 },
