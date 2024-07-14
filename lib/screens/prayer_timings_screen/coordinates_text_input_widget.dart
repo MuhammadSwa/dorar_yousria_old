@@ -37,7 +37,8 @@ class CoordinatesTextInputWidget extends StatelessWidget {
               onChanged: (value) => formModel.setLatitude(value),
               controller: controller['latitude'],
               decoration: const InputDecoration(
-                labelText: 'خط العرض',
+                labelText: 'العرض',
+                helperText: 'مثال: 30.0',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.location_on),
               ),
@@ -70,7 +71,8 @@ class CoordinatesTextInputWidget extends StatelessWidget {
               onChanged: (value) => formModel.setLongitude(value),
               controller: controller['longitude'],
               decoration: const InputDecoration(
-                labelText: 'خط الطول',
+                labelText: 'الطول',
+                helperText: 'مثال: 30.0',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.location_on),
               ),
